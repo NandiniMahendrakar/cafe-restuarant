@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grillin' & Chillin'</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <a href="https:/wa.me/918867347750"  target="_blank" class="whatsapp_float"><i class="fa-brands fa-whatsapp whatsapp-icon"></i></a>
+
+</div>
+
 
     <section id="Home">
         <nav>
@@ -81,19 +86,69 @@
 
         </div>
 
-        <a href="#" class="about_btn">Order Now</a>
-
-    </div>
+        <a href="#" class="about_btn">Order Now</a
 
 
 
     <!--Menu-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    let foodData = [];
+
+    async function handleFetch() {
+        const data = await fetch('https://cafe-resturant-default-rtdb.firebaseio.com/');
+        foodData = await data.json();
+        updateFoodMenu();
+    }
+
+    function updateFoodMenu() {
+        let foodMenuHtml = '';
+
+        for (let i = 0; i < foodData.length; i++) {
+            const item = foodData[i];
+
+            foodMenuHtml += '<div class="menu_card">' +
+                '<div class="menu_image">' +
+                '<img src="' + item.image + '" />' +
+                '</div>' +
+                '<div class="small_card">' +
+                '<i class="fa-solid fa-heart"></i>' +
+                '</div>' +
+                '<div class="menu_info">' +
+                '<h2>' + item.food + '</h2>' +
+                '<p>' + item.decription + '</p>' +
+                '<h3>Rs ' + item.price + '</h3>' +
+                '<div class="menu_icon">' +
+                '<i class="fa-solid fa-star"></i>' +
+                '<i class="fa-solid fa-star"></i>' +
+                '<i class="fa-solid fa-star"></i>' +
+                '<i class="fa-solid fa-star"></i>' +
+                '<i class="fa-solid fa-star-half-stroke"></i>' +
+                '</div>' +
+                '<a href="#" class="menu_btn">Order Now</a>' +
+                '</div>' +
+                '</div>';
+        }
+
+        document.getElementById('food').innerHTML = foodMenuHtml;
+    }
+
+    handleFetch();
+
+    // Add an event listener to the window object to re-render the menu when data is loaded
+    window.addEventListener('load', updateFoodMenu);
+});
+
+      </script>
+      
 
     <div class="menu" id="Menu">
         <h1>Our<span>Menu</span></h1>
 
         <div class="menu_box">
             <div class="menu_card">
+                <div id="food" ></div>
+
 
                 <div class="menu_image">
                     <img src="image/burger.jpg">
